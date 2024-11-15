@@ -2,12 +2,22 @@ import SideSection from "./components/SideSection";
 import NewProject from "./components/NewProject";
 import { useState } from "react";
 import NoProjectSelected from "./components/NoProjectSelected.jsx";
-import noProjectImg from "./assets/no-projects.png";
+import SelectedProject from "./components/SelectedProjects.jsx";
+
 function App() {
   const [projectState, setProjectState] = useState({
     selectedProjectId: undefined,
     projects: [],
   });
+
+  function handleSelectProject(id) {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: id,
+      };
+    });
+  }
 
   function handleStartAddProject() {
     setProjectState((prevState) => {
@@ -40,7 +50,13 @@ function App() {
       };
     });
   }
-  let content;
+
+  const selectedProject = projectState.projects.find(
+    (project) => project.id === projectState.selectedProjectId
+  );
+
+  let content = <SelectedProject project={selectedProject} />;
+
   if (projectState.selectedProjectId === null) {
     content = (
       <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject} />
@@ -54,6 +70,7 @@ function App() {
       <SideSection
         onStartAddProject={handleStartAddProject}
         projects={projectState.projects}
+        onSelectProject={handleSelectProject}
       />
       {content}
     </main>
