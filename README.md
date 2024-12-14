@@ -14,10 +14,16 @@ Clone this repository:
 
 ```bash
 git clone https://github.com/your-username/react-practice-projects.git
+```
+
+Start the Project:
+
+```bash
 cd react-practice-projects/project-name
 npm install
 npm run dev
 ```
+
 Open your browser and go to the URL displayed in the terminal (usually http://localhost:5173) to view the project.
 
 ## Technologies Used
